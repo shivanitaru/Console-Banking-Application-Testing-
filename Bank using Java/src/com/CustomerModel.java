@@ -1,11 +1,15 @@
 package com;
 public class CustomerModel {
 	
-	private int accountNumber=100;
-	private String name="Mr.A";
-	private int age=20;
-	private double balance=2500;
-	private String
+	private int accountNumber;
+	private String name;
+	private int age;
+	private double balance;
+	private String accountType;
+	private String branchName;
+	private String emailId;
+	private long mobileNumber;
+	private long aadhaarNumber;
 	private String username;
 	private String password;
 
@@ -16,6 +20,36 @@ public class CustomerModel {
 	}
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	public String getAccountType() {
+		return accountType;
+	}
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public long getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(long mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	public long getAadhaarNumber() {
+		return aadhaarNumber;
+	}
+	public void setAadhaarNumber(long aadhaarNumber) {
+		this.aadhaarNumber = aadhaarNumber;
 	}
 	public String getUsername() {
 		return username;

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.CustomerModel;
+import com.exception.MinimumBalance;
+import com.model.CustomerModel;
+import com.model.LoginModel;
 
 public class Bank {
 	List<CustomerModel> customerList = new ArrayList<CustomerModel>();

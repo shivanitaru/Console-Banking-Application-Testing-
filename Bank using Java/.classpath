@@ -6,5 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/JUnit/junit-4.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

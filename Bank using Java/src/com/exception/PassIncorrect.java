@@ -1,4 +1,4 @@
-package com;
+package com.exception;
 public class PassIncorrect extends Exception {
 	String pass;
 	public PassIncorrect(String s) 

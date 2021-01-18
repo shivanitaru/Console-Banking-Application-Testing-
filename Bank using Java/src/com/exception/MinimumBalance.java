@@ -1,4 +1,4 @@
-package com;
+package com.exception;
 
 public class MinimumBalance extends Exception{
 	@Override

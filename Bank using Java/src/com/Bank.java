@@ -37,84 +37,85 @@ public class Bank {
 
 	// function to create account
 	public void Register() {
-
+		CustomerModel customerModelRegObj = new CustomerModel();
 		System.out.println("\nWelcome to Bank of Pune!!");
 
 		System.out.println("Enter Your Name : ");
-		customerModelObj.setName(sc.next());
+		customerModelRegObj.setName(sc.next());
 
 		System.out.println("Enter Your Age : ");
-		customerModelObj.setAge(sc.nextInt());
+		customerModelRegObj.setAge(sc.nextInt());
 
 		System.out.println("Enter Your Mobile Number : ");
-		customerModelObj.setMobileNumber(sc.nextLong());
+		customerModelRegObj.setMobileNumber(sc.nextLong());
 
 		System.out.println("Enter Your Email Id : ");
-		customerModelObj.setEmailId(sc.next());
+		customerModelRegObj.setEmailId(sc.next());
 
 		System.out.println("Enter Your Aadhaar Number : ");
-		customerModelObj.setAadhaarNumber(sc.nextLong());
+		customerModelRegObj.setAadhaarNumber(sc.nextLong());
 
 		while (true) {
 			System.out.println("Choose Your Account Type : \n" + "\t1. Saving\n" + "\t2. Current");
 			int accountChoice = sc.nextInt();
 			switch (accountChoice) {
 			case 1:
-				customerModelObj.setAccountType("Saving Account");
+				customerModelRegObj.setAccountType("Saving Account");
 				break;
 			case 2:
-				customerModelObj.setAccountType("Current Account");
+				customerModelRegObj.setAccountType("Current Account");
 				break;
 			default:
 				System.out.println("\nInvalid Choice! Try Again...\n");
 			}
-			if (customerModelObj.getAccountType() != null)
+			if (customerModelRegObj.getAccountType() != null)
 				break;
 		}
 
 		while (true) {
-			System.out.println(
-					"Choose Your Branch : \n" + "\t1. Hadapsar\n" + "\t2. Swargate\n" + "\t3. JM Road\n" + "\t4. Bund Garden");
+			System.out.println("Choose Your Branch : \n" + "\t1. Hadapsar\n" + "\t2. Swargate\n" + "\t3. JM Road\n"
+					+ "\t4. Bund Garden");
 			int branchChoice = sc.nextInt();
 
 			switch (branchChoice) {
 			case 1:
-				customerModelObj.setBranchName("Hadapsar");
+				customerModelRegObj.setBranchName("Hadapsar");
 				break;
 			case 2:
-				customerModelObj.setBranchName("Swargate");
+				customerModelRegObj.setBranchName("Swargate");
 				break;
 			case 3:
-				customerModelObj.setBranchName("JM Road");
+				customerModelRegObj.setBranchName("JM Road");
 				break;
 			case 4:
-				customerModelObj.setBranchName("Bund Garden");
+				customerModelRegObj.setBranchName("Bund Garden");
 				break;
 			default:
 				System.out.println("\nInvalid Choice! Try Again...");
 			}
-			if (customerModelObj.getBranchName() != null)
+			if (customerModelRegObj.getBranchName() != null)
 				break;
 		}
 
-		customerModelObj.setAccountNumber(generateAccountNumber());
+		customerModelRegObj.setAccountNumber(generateAccountNumber());
 
 		System.out.println("Congratulations Your Account is Created Successfully!!");
 
-		System.out.println("Your Account Number is " + (customerModelObj.getAccountNumber()));
+		System.out.println("Your Account Number is " + (customerModelRegObj.getAccountNumber()));
 		System.out.println("==============================");
 		System.out.println("Set Username for your account:");
-		customerModelObj.setUsername(sc.next());
+		customerModelRegObj.setUsername(sc.next());
 		System.out.println("Set Password for your account:");
-		customerModelObj.setPassword(sc.next());
+		customerModelRegObj.setPassword(sc.next());
 		System.out.println("==============================");
-		
-		customerModelObj.setBalance(2500);
+
+		customerModelRegObj.setBalance(2500);
 		System.out.println(
 				"Your Data is Registered!!!\nYou can start using our services by logging in. \nHappy Banking!!!");
-		System.out.println("Your Initial Balance is : Rs" + customerModelObj.getBalance());
+		System.out.println("Your Initial Balance is : Rs" + customerModelRegObj.getBalance());
 		System.out.println("==============================");
-		customerList.add(customerModelObj);
+		customerList.add(customerModelRegObj);
+		customerModelObj = customerModelRegObj;
 	}
 
 	public int generateAccountNumber() {
@@ -130,7 +131,7 @@ public class Bank {
 		int access = validate();
 		if (access == 1) {
 			System.out.println("Login Successful!!!");
-			//dashboardMenu();
+			// dashboardMenu();
 		} else {
 			System.out.println("\nLogin Failed!!!\n\n" + "Please enter valid credentials.");
 		}
@@ -185,7 +186,7 @@ public class Bank {
 		try {
 			if (customerModelObj.getBalance() == 1000 || (customerModelObj.getBalance() - withdrawAmount) < 1000)
 				throw new MinimumBalance();
-			else{
+			else {
 				customerModelObj.setBalance(customerModelObj.getBalance() - withdrawAmount);
 				viewBalance();
 			}
@@ -207,29 +208,28 @@ public class Bank {
 		System.out.println("========================================");
 	}
 
-	private void viewBalance(){
+	private void viewBalance() {
 		System.out.println("================================");
 		System.out.println("Your Bank Balance is " + customerModelObj.getBalance());
 		System.out.println("================================");
 	}
-	
+
 	private void fundTransfer() {
 		int flag = 0;
 		System.out.println("Enter Beneficiary Account Number:");
 		int beneficiaryAccountNumber = sc.nextInt();
-		for(CustomerModel c:customerList){
-			if(beneficiaryAccountNumber == customerModelObj.getAccountNumber()){
+		for (CustomerModel c : customerList) {
+			if (beneficiaryAccountNumber == customerModelObj.getAccountNumber()) {
 				System.out.println("Sorry, You have entered invalid beneficiary account number!! ");
 				flag = 1;
 				break;
-			}
-			else if(beneficiaryAccountNumber == c.getAccountNumber()){
+			} else if (beneficiaryAccountNumber == c.getAccountNumber()) {
 				System.out.println("Enter the Amount You want to transfer to the given beneficiary account: ");
 				double amount = sc.nextDouble();
 				try {
 					if (customerModelObj.getBalance() == 1000 || (customerModelObj.getBalance() - amount) < 1000)
 						throw new MinimumBalance();
-					else{
+					else {
 						customerModelObj.setBalance(customerModelObj.getBalance() - amount);
 						c.setBalance(c.getBalance() + amount);
 						System.out.println("Amount has been successfully transferred!!");
@@ -242,15 +242,17 @@ public class Bank {
 				break;
 			}
 		}
-		if(flag == 0){
+		if (flag == 0) {
 			System.out.println("Sorry, No such account with the given beneficiary account number is found!!");
 		}
 	}
 
 	public void mainMenu() {
+		boolean flag = true;
 		System.out.println("Welcome to Bank of Pune, The Bank Of Richest!!");
-		System.out.println("\t1.Register");
-		System.out.println("\t2.Login");
+		System.out.println("\t1. Register");
+		System.out.println("\t2. Login");
+		System.out.println("\t3. Exit");
 		int choice;
 		System.out.println("Enter Your Choice:");
 		choice = sc.nextInt();
@@ -261,11 +263,14 @@ public class Bank {
 		case 2:
 			Login();
 			break;
+		case 3:
+			System.exit(0);
 		}
 	}
 
 	public static void main(String[] args) {
 		Bank a = new Bank();
+		
 		while (true) {
 			a.mainMenu();
 		}

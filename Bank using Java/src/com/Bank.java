@@ -9,9 +9,11 @@ import com.model.CustomerModel;
 import com.model.LoginModel;
 
 public class Bank {
-	List<CustomerModel> customerList = new ArrayList<CustomerModel>();
-	LoginModel loginModelObj = new LoginModel();
-	CustomerModel customerModelObj = new CustomerModel();
+	public List<CustomerModel> customerList = new ArrayList<CustomerModel>();
+	public LoginModel loginModelObj = new LoginModel();
+	public CustomerModel customerModelObj = new CustomerModel();
+	public double depositAmount = 0.0;
+	public double withdrawAmount = 0.0;
 	Scanner sc = new Scanner(System.in);
 
 	int validate() {
@@ -36,7 +38,6 @@ public class Bank {
 	// function to create account
 	public void Register() {
 
-		CustomerModel customerModelObj = new CustomerModel();
 		System.out.println("\nWelcome to Bank of Pune!!");
 
 		System.out.println("Enter Your Name : ");
@@ -129,13 +130,13 @@ public class Bank {
 		int access = validate();
 		if (access == 1) {
 			System.out.println("Login Successful!!!");
-			dashboardMenu();
+			//dashboardMenu();
 		} else {
 			System.out.println("\nLogin Failed!!!\n\n" + "Please enter valid credentials.");
 		}
 	}
 
-	private void dashboardMenu() {
+	public void dashboardMenu() {
 		boolean flag = true;
 		while (flag) {
 			System.out.println("\n\nWelcome to Bank of Pune, The Bank Of Richest!!");
@@ -173,14 +174,14 @@ public class Bank {
 
 	public void deposit() {
 		System.out.println("Enter the Amount You want to Deposit:");
-		double depositAmount = sc.nextDouble();
+		depositAmount = sc.nextDouble();
 		customerModelObj.setBalance(customerModelObj.getBalance() + depositAmount);
 		viewBalance();
 	}
 
 	public void withdraw() {
 		System.out.println("Enter the Amount You want to Withdraw:");
-		double withdrawAmount = sc.nextDouble();
+		withdrawAmount = sc.nextDouble();
 		try {
 			if (customerModelObj.getBalance() == 1000 || (customerModelObj.getBalance() - withdrawAmount) < 1000)
 				throw new MinimumBalance();

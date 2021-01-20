@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import com.Bank;
 
-public class TestDeposit {
-	Bank bankObj = new Bank();	
+public class TestLogin {
+	Bank bankObj = new Bank();
 	
 	@Test
-	public void testDeposit(){
+	public void testLogin(){
 		bankObj.Register();
 		assertEquals("5",bankObj.customerModelObj.getName());
 		assertEquals(5,bankObj.customerModelObj.getAge(), 0.0);
@@ -27,10 +27,5 @@ public class TestDeposit {
 		assertEquals("5",bankObj.loginModelObj.getUsername());
 		assertEquals("5",bankObj.loginModelObj.getPassword());
 		
-		double beforeDeposit = bankObj.customerModelObj.getBalance();
-		bankObj.deposit();
-		double depositAmount = bankObj.depositAmount;
-		double afterDeposit = beforeDeposit + depositAmount;
-		assertEquals(afterDeposit,bankObj.customerModelObj.getBalance(),0.0);
-	}	
+	}
 }

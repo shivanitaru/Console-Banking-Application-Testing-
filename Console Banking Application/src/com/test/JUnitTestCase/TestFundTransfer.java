@@ -2,12 +2,19 @@ package com.test.JUnitTestCase;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import org.junit.Test;
 
 import com.controller.Bank;
+import com.model.CustomerModel;
 
 public class TestFundTransfer {
 	Bank bankObj = new Bank();
+	Scanner sc = new Scanner(System.in);
+	public List<CustomerModel> customerList = bankObj.customerList;
 
 	@Test
 	public void testFundTransfer() {
@@ -23,9 +30,8 @@ public class TestFundTransfer {
 		assertEquals("vinimehta", bankObj.customerModelObj.getUsername());
 		assertEquals("vini@123", bankObj.customerModelObj.getPassword());
 
-
 		bankObj.Register();
-		assertEquals("Shivanini", bankObj.customerModelObj.getName());
+		assertEquals("Shivani", bankObj.customerModelObj.getName());
 		assertEquals(20, bankObj.customerModelObj.getAge(), 0.0);
 		assertEquals(848658299, bankObj.customerModelObj.getMobileNumber(), 0.0);
 		assertEquals("shivani@gmail.com", bankObj.customerModelObj.getEmailId());
@@ -40,11 +46,32 @@ public class TestFundTransfer {
 		assertEquals("shivanitaru", bankObj.loginModelObj.getUsername());
 		assertEquals("shivani@123", bankObj.loginModelObj.getPassword());
 
-		// double beforeDeposit = bankObj.customerModelObj.getBalance();
-		// bankObj.deposit();
-		// double depositAmount = bankObj.depositAmount;
-		// double afterDeposit = beforeDeposit + depositAmount;
-		// assertEquals(afterDeposit,bankObj.customerModelObj.getBalance(),0.0);
+		double remitterBeforeBalance = bankObj.customerModelObj.getBalance();
+		double beneficiaryBeforeBalance = 0.0;
+		double remitterAfterBalance = remitterBeforeBalance;
+		double beneficiaryAfterBalance;
+		double testBeneficiaryAfterBalance = 0.0;
+		System.out.println("Enter Beneficiary Account Number:");
+		bankObj.beneficiaryAccountNumber = sc.nextInt();
+		for (CustomerModel c : customerList) {
+			System.out.println(c.getAccountNumber());
+			if (c.getAccountNumber() == bankObj.beneficiaryAccountNumber) {
+				beneficiaryBeforeBalance = c.getBalance();
+			}
+		}
+		beneficiaryAfterBalance = beneficiaryBeforeBalance;
+		bankObj.fundTransfer();
+		remitterAfterBalance -= bankObj.fundTransferAmount;
+		beneficiaryAfterBalance += bankObj.fundTransferAmount;
+		assertEquals(remitterAfterBalance, bankObj.customerModelObj.getBalance(), 0.0);
+
+		for (CustomerModel c : customerList) {
+			if (c.getAccountNumber() == bankObj.beneficiaryAccountNumber) {
+				testBeneficiaryAfterBalance = c.getBalance();
+			}
+		}
+		assertEquals(beneficiaryAfterBalance, testBeneficiaryAfterBalance, 0.0);
+
 	}
 
 }

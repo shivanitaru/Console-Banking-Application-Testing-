@@ -14,6 +14,8 @@ public class Bank {
 	public CustomerModel customerModelObj = new CustomerModel();
 	public double depositAmount = 0.0;
 	public double withdrawAmount = 0.0;
+	public int beneficiaryAccountNumber = 0;
+	public double fundTransferAmount = 0.0;
 	Scanner sc = new Scanner(System.in);
 
 	int validate() {
@@ -24,12 +26,15 @@ public class Bank {
 		loginModelObj.setPassword(sc.next());
 		for (CustomerModel c : customerList) {
 			if (loginModelObj.getUsername().equals(c.getUsername())) {
-				if (loginModelObj.getPassword().equals(c.getPassword()))
+				if (!loginModelObj.getPassword().equals(c.getPassword())) {
 					System.out.println("Password Incorrect!!");
-				customerModelObj = c;
-				System.out.println(customerModelObj.getAccountNumber());
-				flag = 1;
-				break;
+					break;
+				} else {
+					customerModelObj = c;
+					System.out.println(customerModelObj.getAccountNumber());
+					flag = 1;
+					break;
+				}
 			}
 		}
 		return flag;
@@ -131,7 +136,7 @@ public class Bank {
 		int access = validate();
 		if (access == 1) {
 			System.out.println("Login Successful!!!");
-//			dashboardMenu();
+			// dashboardMenu();
 		} else {
 			System.out.println("\nLogin Failed!!!\n\n" + "Please enter valid credentials.");
 		}
@@ -158,6 +163,8 @@ public class Bank {
 				withdraw();
 				break;
 			case 3:
+				System.out.println("Enter Beneficiary Account Number:");
+				beneficiaryAccountNumber = sc.nextInt();
 				fundTransfer();
 				break;
 			case 4:
@@ -216,10 +223,8 @@ public class Bank {
 		return balance;
 	}
 
-	private void fundTransfer() {
+	public void fundTransfer() {
 		int flag = 0;
-		System.out.println("Enter Beneficiary Account Number:");
-		int beneficiaryAccountNumber = sc.nextInt();
 		for (CustomerModel c : customerList) {
 			if (beneficiaryAccountNumber == customerModelObj.getAccountNumber()) {
 				System.out.println("Sorry, You have entered invalid beneficiary account number!! ");
@@ -227,13 +232,14 @@ public class Bank {
 				break;
 			} else if (beneficiaryAccountNumber == c.getAccountNumber()) {
 				System.out.println("Enter the Amount You want to transfer to the given beneficiary account: ");
-				double amount = sc.nextDouble();
+				fundTransferAmount = sc.nextDouble();
 				try {
-					if (customerModelObj.getBalance() == 1000 || (customerModelObj.getBalance() - amount) < 1000)
+					if (customerModelObj.getBalance() == 1000
+							|| (customerModelObj.getBalance() - fundTransferAmount) < 1000)
 						throw new MinimumBalance();
 					else {
-						customerModelObj.setBalance(customerModelObj.getBalance() - amount);
-						c.setBalance(c.getBalance() + amount);
+						customerModelObj.setBalance(customerModelObj.getBalance() - fundTransferAmount);
+						c.setBalance(c.getBalance() + fundTransferAmount);
 						System.out.println("Amount has been successfully transferred!!");
 						viewBalance();
 					}
@@ -272,7 +278,7 @@ public class Bank {
 
 	public static void main(String[] args) {
 		Bank a = new Bank();
-		
+
 		while (true) {
 			a.mainMenu();
 		}

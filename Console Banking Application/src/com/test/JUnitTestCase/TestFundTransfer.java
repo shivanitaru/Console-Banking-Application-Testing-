@@ -18,29 +18,14 @@ public class TestFundTransfer {
 
 	@Test
 	public void testFundTransfer() {
-		bankObj.Register();
-		assertEquals("Vini", bankObj.customerModelObj.getName());
-		assertEquals(20, bankObj.customerModelObj.getAge(), 0.0);
-		assertEquals(942125299, bankObj.customerModelObj.getMobileNumber(), 0.0);
-		assertEquals("vini@gmail.com", bankObj.customerModelObj.getEmailId());
-		assertEquals(152639652, bankObj.customerModelObj.getAadhaarNumber(), 0.0);
-		assertEquals("Saving Account", bankObj.customerModelObj.getAccountType());
-		assertEquals("Swargate", bankObj.customerModelObj.getBranchName());
-		assertEquals(101, bankObj.customerModelObj.getAccountNumber(), 0.0);
-		assertEquals("vinimehta", bankObj.customerModelObj.getUsername());
-		assertEquals("vini@123", bankObj.customerModelObj.getPassword());
-
-		bankObj.Register();
-		assertEquals("Shivani", bankObj.customerModelObj.getName());
-		assertEquals(20, bankObj.customerModelObj.getAge(), 0.0);
-		assertEquals(848658299, bankObj.customerModelObj.getMobileNumber(), 0.0);
-		assertEquals("shivani@gmail.com", bankObj.customerModelObj.getEmailId());
-		assertEquals(857526315, bankObj.customerModelObj.getAadhaarNumber(), 0.0);
-		assertEquals("Current Account", bankObj.customerModelObj.getAccountType());
-		assertEquals("Hadapsar", bankObj.customerModelObj.getBranchName());
-		assertEquals(102, bankObj.customerModelObj.getAccountNumber(), 0.0);
-		assertEquals("shivanitaru", bankObj.customerModelObj.getUsername());
-		assertEquals("shivani@123", bankObj.customerModelObj.getPassword());
+		while(true){
+			bankObj.Register();
+			System.out.println("Do you want to register one more account?\nPress 1 if Yes and 0 if No: ");
+			int ch = sc.nextInt();
+			if(ch==0){
+				break;
+			}
+		}
 
 		bankObj.Login();
 		assertEquals("shivanitaru", bankObj.loginModelObj.getUsername());

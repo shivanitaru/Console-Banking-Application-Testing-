@@ -1,6 +1,6 @@
 package com.test.JUnitTestCase;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class TestViewDetails {
 		assertEquals("vinimehta", bankObj.loginModelObj.getUsername());
 		assertEquals("vini@123", bankObj.loginModelObj.getPassword());
 
-		bankObj.getAccountDetails();
+				assertSame(bankObj.customerModelObj, bankObj.getAccountDetails());
 
 	}
 

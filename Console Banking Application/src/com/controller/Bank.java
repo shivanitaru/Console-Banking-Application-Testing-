@@ -202,7 +202,7 @@ public class Bank {
 		}
 	}
 
-	public void getAccountDetails() {
+	public CustomerModel getAccountDetails() {
 		System.out.println("========================================");
 		System.out.println("Name \t\t\t: " + customerModelObj.getName());
 		System.out.println("Age  \t\t\t: " + customerModelObj.getAge());
@@ -213,6 +213,7 @@ public class Bank {
 		System.out.println("Branch Name \t\t: " + customerModelObj.getBranchName());
 		System.out.println("Balance \t\t: " + customerModelObj.getBalance());
 		System.out.println("========================================");
+return customerModelObj;
 	}
 
 	public double viewBalance() {
